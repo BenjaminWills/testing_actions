@@ -1,0 +1,49 @@
+name: Image Optimiser
+
+# Documented here: https://github.com/marketplace/actions/image-optimizer-action
+# Current image types present in the repo:
+  # avif
+  # gif
+  # jpeg
+  # jpg
+  # png
+  # webp
+
+# TODO: Add a secret to github called image_optimiser_token that will allow this workflow to write to the PR branch.
+
+on:
+  pull_request:
+    branches:
+      - main
+    # paths:
+    # # Only run on changes to image files
+    #   - '*.svg'
+    #   - '*.png'
+    #   - '*.jpg'
+    #   - '*.jpeg'
+    #   - '*.gif'
+    #   - '*.webp'
+    #   - '*.avif'
+
+jobs:
+  optimise-images:
+    name: stellasoftio/image-optimizer-action
+    # Action will write all changes to the PR branch, so needs write permissions
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compress Images
+        id: compress-images
+        uses: stellasoftio/image-optimizer-action@v1
+        with:
+          # Required to commit changes back to the PR branch
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Setting debug to be true makes logs more verbose, optional
+          debug: true
+          # Ignore some paths to prevent unnecessary processing
+          ignore-paths: |
+            **/.github/**
+            **/hooks/**
