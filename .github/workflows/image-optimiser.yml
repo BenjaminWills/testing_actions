@@ -41,7 +41,7 @@ jobs:
         uses: stellasoftio/image-optimizer-action@v1
         with:
           # Required to commit changes back to the PR branch
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
           # Setting debug to be true makes logs more verbose, optional
           debug: true
           # Ignore some paths to prevent unnecessary processing
