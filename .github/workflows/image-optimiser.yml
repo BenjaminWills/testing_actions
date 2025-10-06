@@ -15,15 +15,16 @@ on:
   pull_request:
     branches:
       - main
-    # paths:
-    # # Only run on changes to image files
-    #   - '*.svg'
-    #   - '*.png'
-    #   - '*.jpg'
-    #   - '*.jpeg'
-    #   - '*.gif'
-    #   - '*.webp'
-    #   - '*.avif'
+    paths:
+    # Only run on changes to image files
+      - '*.svg'
+      - '*.png'
+      - '*.jpg'
+      - '*.jpeg'
+      - '*.gif'
+      - '*.webp'
+      - '*.avif'
+  workflow_dispatch:
 
 jobs:
   optimise-images:
